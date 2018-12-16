@@ -1,0 +1,27 @@
+#
+# Values for the example-k8s application.
+
+replicaCount: 1
+
+image:
+  pullPolicy: IfNotPresent
+  repository: 421157468025.dkr.ecr.us-west-2.amazonaws.com/example
+  tag: latest
+
+service:
+  type: NodePort
+  port: 9000
+
+resources:
+  limits:
+   cpu: 200m
+   memory: 256Mi
+  requests:
+   cpu: 100m
+   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
