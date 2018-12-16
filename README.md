@@ -7,11 +7,11 @@ example application for testing a new Kubernetes server.
 Installation
 ------------
 
-## Kubectl
+### Kubectl
 
       kubectl create namespace example
       kubectl run --image spacez320/example-k8s:latest example --namespace example
 
-## Helm
+### Helm
 
       helm upgrade --install --namespace example example ./helm
