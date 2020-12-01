@@ -5,7 +5,7 @@ replicaCount: 1
 
 image:
   pullPolicy: IfNotPresent
-  repository: 421157468025.dkr.ecr.us-west-2.amazonaws.com/example
+  repository: spacez320/example-k8s
   tag: latest
 
 service:
