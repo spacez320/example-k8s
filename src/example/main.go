@@ -35,8 +35,11 @@ func httpResponseOk(writer http.ResponseWriter, request *http.Request) {
 	}
 	fmt.Println()
 
+	// Formulate a response of a certain size.
+	response := "\x00"
+
 	// Send a response.
-	fmt.Fprintf(writer, "OK.\r\n")
+	fmt.Fprintf(writer, response)
 }
 
 func main() {
