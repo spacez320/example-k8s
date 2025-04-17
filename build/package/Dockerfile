@@ -18,5 +18,5 @@ EXPOSE $PORT
 WORKDIR /app
 COPY . .
 
-RUN go install example
+RUN go install ./src/example
 CMD ["bin/example"]

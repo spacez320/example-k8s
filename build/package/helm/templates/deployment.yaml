@@ -21,11 +21,10 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          env:
-            - name: PORT
-              value: "{{ .Values.service.port }}"
+          envFrom:
+            - configMapRef:
+                name: {{ template "example.fullname" . }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}

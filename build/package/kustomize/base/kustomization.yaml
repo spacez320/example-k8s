@@ -1,0 +1,18 @@
+configMapGenerator:
+  - name: example
+    literals:
+      - PORT=9000
+generatorOptions:
+  disableNameSuffixHash: true
+images:
+  - name: example
+    newName: spacez320/example-k8s
+    newTag: latest
+labels:
+  - pairs:
+      app: example-k8s
+    includeSelectors: true
+nameSuffix: "-example-k8s"
+resources:
+  - deployment.yaml
+  - service.yaml

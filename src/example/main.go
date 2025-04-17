@@ -17,6 +17,10 @@ import (
 	"time"
 )
 
+const (
+	DEFAULT_PORT = "9000"
+)
+
 var (
 	port = os.Getenv("PORT")
 )
@@ -40,6 +44,12 @@ func httpResponseOk(writer http.ResponseWriter, request *http.Request) {
 }
 
 func main() {
+	if port == "" {
+		port = DEFAULT_PORT
+	}
+
+	fmt.Printf("Listening on %s ...\n", port)
+
 	http.HandleFunc("/", httpResponseOk)
 
 	err := http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
