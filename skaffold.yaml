@@ -13,12 +13,14 @@ build:
   local:
     push: true
 test:
-  - image: example
+  - image: spacez320/example-k8s
     custom:
       - command: "cd src/example && go test"
         dependencies:
           paths:
             - "**/*_test.go"
+    structureTests:
+          - "build/package/test/config.yaml"
 manifests:
   kustomize:
     paths:
