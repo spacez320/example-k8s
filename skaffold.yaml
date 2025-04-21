@@ -1,0 +1,31 @@
+apiVersion: skaffold/v4beta13
+kind: Config
+metadata:
+  name: example-k8s
+build:
+  artifacts:
+    - image: example
+      # context: .
+      docker:
+        dockerfile: build/package/Dockerfile
+  # local:
+  #   useDockerCLI: true
+# manifests:
+#   kustomize:
+#     paths:
+#       - build/package/kustomize/base
+#       - build/package/kustomize/overlays/default
+deploy:
+  helm:
+    releases:
+      - name: example-k8s
+        chartPath: build/package/helm
+        valuesFiles:
+          - build/package/helm/values.yaml
+        version: 0.1.0
+# profiles:
+#   - name: default
+#     manifests:
+#       kustomize:
+#         paths:
+#           - build/package/kustomize/overlays/default
