@@ -43,6 +43,12 @@ kubectl apply --kustomize ./build/package/kustomize/overlays/default/ --namespac
 Development
 -----------
 
+Skaffold is available for some local workflows.
+
+```
+skaffold run
+```
+
 It's a good idea to make sure that the Helm Chart and Kustomize setups are producing roughly the
 same things.
 

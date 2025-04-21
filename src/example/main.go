@@ -37,7 +37,6 @@ func httpResponseOk(writer http.ResponseWriter, request *http.Request) {
 	for k, v := range request.Form {
 		fmt.Println(fmt.Sprintf("%s:", k), strings.Join(v, ""))
 	}
-	fmt.Println()
 
 	// Send a response.
 	fmt.Fprintf(writer, "OK.\r\n")

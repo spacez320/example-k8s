@@ -4,28 +4,36 @@ metadata:
   name: example-k8s
 build:
   artifacts:
-    - image: example
-      # context: .
+    - image: spacez320/example-k8s
       docker:
         dockerfile: build/package/Dockerfile
-  # local:
-  #   useDockerCLI: true
-# manifests:
-#   kustomize:
-#     paths:
-#       - build/package/kustomize/base
-#       - build/package/kustomize/overlays/default
+      # sync:
+      #   infer:
+      #     - "**/*.go"
+  local:
+    push: true
+test:
+  - image: example
+    custom:
+      - command: "cd src/example && go test"
+        dependencies:
+          paths:
+            - "**/*_test.go"
+manifests:
+  kustomize:
+    paths:
+      - build/package/kustomize/overlays/default
+  # helm:
+  #   releases:
+  #     - name: example
+  #       chartPath: build/package/helm
+  #       createNamespace: true
+  #       namespace: example
 deploy:
-  helm:
-    releases:
-      - name: example-k8s
-        chartPath: build/package/helm
-        valuesFiles:
-          - build/package/helm/values.yaml
-        version: 0.1.0
-# profiles:
-#   - name: default
-#     manifests:
-#       kustomize:
-#         paths:
-#           - build/package/kustomize/overlays/default
+  kubectl:
+    defaultNamespace: example
+portForward:
+  - namespace: example
+    port: 9000
+    resourceName: example-example-k8s
+    resourceType: service
