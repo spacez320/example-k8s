@@ -1,3 +1,6 @@
+#
+# Workflow for building, testing, and deploying the simple Go webserver
+
 apiVersion: skaffold/v4beta13
 kind: Config
 metadata:
@@ -7,9 +10,6 @@ build:
     - image: spacez320/example-k8s
       docker:
         dockerfile: build/package/Dockerfile
-      # sync:
-      #   infer:
-      #     - "**/*.go"
   local:
     push: true
 test:
@@ -25,6 +25,8 @@ manifests:
   kustomize:
     paths:
       - build/package/kustomize/overlays/default
+  # Preserving if wanting to attempt the source of Kubernetes manifests be Helm instead of
+  # Kustomize--both should produce the same deployment.
   # helm:
   #   releases:
   #     - name: example
