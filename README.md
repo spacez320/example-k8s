@@ -43,6 +43,13 @@ kubectl apply --kustomize ./build/package/kustomize/overlays/default/ --namespac
 Development
 -----------
 
+Skaffold is available for some local workflows. This has generally been tested on local Minikube.
+
+```
+eval $(minikube docker-env)  # If trying to use a local image build instead of Docker Hub
+skaffold dev --filename build/package/skaffold/skaffold.yaml
+```
+
 It's a good idea to make sure that the Helm Chart and Kustomize setups are producing roughly the
 same things.
 
@@ -50,4 +57,11 @@ same things.
 diff --side-by-side \
     <(helm template example ./build/package/helm | sed '/^#/d' | yq --prettyPrint 'sort_keys(..)') \
     <(kubectl kustomize ./build/package/kustomize/overlays/default/ | yq --prettyPrint 'sort_keys(..)')
+```
+
+The webserver itself has some tests.
+
+```
+cd src/example
+go test
 ```
